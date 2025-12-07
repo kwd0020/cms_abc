@@ -1,24 +1,15 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complaint Management System | Users</title>
-</head>
-<body>
+<x-dashboard>
     <h2> Current Users </h2>
     <p> {{$greeting}} </p>
 
     <ul>
-        <li>
-            <a href="/users/{{$users[0]["user_id"]}}">
-                {{ $users[0]["name"]}}
-            </a>
-        </li>
-        <li>
-            <a href="/users/{{$users[0]["user_id"]}}">
-                {{ $users[1]["name"]}}
-            </a>
-        </li>
+        @foreach($users as $user)
+            <li>
+                <x-card href="/users/{{$user['user_id']}}" :highlight="true">
+                    <h3>{{ $user["name"]}} , {{$user["role"]}} , {{$user["user_id"]}}</h3>
+                </x-card>
+            </li>
+        @endforeach
     </ul>
-</body>
-</html>
+
+</x-dashboard>
