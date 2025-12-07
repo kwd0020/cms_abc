@@ -7,8 +7,18 @@
 <body>
     <h2> All Tickets </h2>
 
-    <ul> 
-        <li> Tickets Here </li>
+    @if($greeting == "hello")
+        <p>Content within directive</p>
+    @endif
+
+    <ul>
+        @foreach($tickets as $ticket)
+            <li>
+                <p> {{$ticket['title'] }} </p>
+                <a href="/tickets/{{$ticket['ticket_id']}}">View Details</a>
+            </li>
+        @endforeach
     </ul>
 </body>
+</html>
 </html>
