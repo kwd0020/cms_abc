@@ -7,13 +7,26 @@ Route::get('/', function () {
 });
 
 Route::get('/tickets', function() {
-    return view('tickets.index');
+    $tickets = [
+        ["title" => "Unauthorized Transaction","status" => "open", "ticket_id" => "1"],
+        ["title" => "Connection Error","status" => "closed", "ticket_id" => "2"],
+    ];
+    return view('tickets.index', ["greeting" => "hello", "tickets" => $tickets]);
+});
+
+Route::get('/tickets/create', function () {
+    return view('tickets.create');
+});
+
+
+Route::get('/tickets/{ticket_id}', function($ticket_id) {
+    return view('tickets.show', ["ticket_id" => $ticket_id]);
 });
 
 Route::get('/users', function() {
     $users = [
-        ["name" => "josh","role" => "systemAdmin", "user_id" => "1"],
-        ["name" => "tyrell","role" => "helpdeskAgent", "user_id" => "2"],
+        ["name" => "josh","role" => "System Admin", "user_id" => "1"],
+        ["name" => "tyrell","role" => "Helpdesk Agent", "user_id" => "2"],
     ];
     return view('users.index', ["greeting" => "hello", "users" => $users]);
 });

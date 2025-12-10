@@ -1,14 +1,17 @@
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complaint Management System | Tickets</title>
-</head>
-<body>
+<x-dashboard>
     <h2> All Tickets </h2>
 
-    <ul> 
-        <li> Tickets Here </li>
+    @if($greeting == "hello")
+        <p>Content within directive</p>
+    @endif
+
+    <ul>
+        @foreach($tickets as $ticket)
+            <li>
+                <x-card href="/tickets/{{$ticket['ticket_id']}}" :highlight="$ticket['status'] == 'open' ">
+                    <h3>{{ $ticket["title"]}} , {{$ticket["status"]}} , {{$ticket["ticket_id"]}}</h3>
+                </x-card>
+            </li>
+        @endforeach
     </ul>
-</body>
-</html>
+</x-dashboard>
