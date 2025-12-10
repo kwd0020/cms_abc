@@ -34,3 +34,15 @@ Route::get('/users', function() {
 Route::get('/users/{user_id}', function($user_id) {
     return view('users.show', ["user_id" => $user_id]);
 });
+
+Route::get('/tenants', function() {
+    $tenants = [
+        ["name" => "Barclays","service" => "Banking", "tenant_id" => "1"],
+        ["name" => "Vodafone","service" => "Telecom", "tenant_id" => "2"],
+    ];
+    return view('tenants.index', ["greeting" => "hello", "tenants" => $tenants]);
+});
+
+Route::get('/tenants/{tenant_id}', function($tenant_id) {
+    return view('tenants.show', ["tenant_id" => $tenant_id]);
+});
