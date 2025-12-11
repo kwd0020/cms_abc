@@ -12,14 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tenants', function (Blueprint $table) {
-            $table->id();
-
+            $table->id('tenant_id');
             $table->string('tenant_name');
-
-            $table->enum('tenant_type', ['bank', 'telecom'])->nullable();
-
-            $table->boolean('tenant_is_active')->default(true);
-
+            $table->enum('tenant_service', ['Banking', 'Telecom'])->nullable();
             $table->timestamps();
         });
     }
