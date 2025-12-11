@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('roles', function (Blueprint $table) {
-            $table->id();
+            $table->id('role_id');
 
             // Role name, e.g. consumer, agent, support, manager, admin
-            $table->string('name');
-            $table->text('description')->nullable();
+            $table->string('role_name');
+            $table->text('role_description')->nullable();
             $table->timestamps();
         });
     }

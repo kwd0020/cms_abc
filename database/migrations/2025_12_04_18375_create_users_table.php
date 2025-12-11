@@ -12,17 +12,24 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->id('user_id');
 
-            // Multi-tenant: each user belongs to one tenant (bank/telecom/etc.)
-            $table->foreignId('tenant_id')->constrained('tenants');
+            //Reference tenants table for foreign key (tenant_id)
+            $table->foreignId('tenant_id')
+            ->references('tenant_id')
+            ->on('tenants')
+            ->cascadeOnDelete();
 
             // Basic identity
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->string('user_name');
+            $table->string('user_email')->unique();
             $table->string('phone_number')->nullable();
             $table->string('password');
-            $table->foreignId('role_id')->constrained('roles')->index();
+            $table->foreignId('role_id')
+            ->references('role_id')
+            ->on('roles')
+            ->cascadeOnDelete()
+            ->cascadeOnUpdate();
 
             // Active flag for manageability/security
             $table->boolean('is_active')->default(true);
@@ -31,7 +38,7 @@ return new class extends Migration
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary();
+            $table->string('user_email')->primary();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
         });

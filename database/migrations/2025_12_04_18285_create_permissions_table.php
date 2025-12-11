@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('permissions', function (Blueprint $table) {
-            $table->id();
+            $table->id('perm_id');
 
             // System-wide permission key, e.g. ticket.create, ticket.update_status
-            $table->string('name')->unique();
+            $table->string('perm_name')->unique();
 
-            $table->string('description')->nullable();
+            $table->string('perm_description')->nullable();
 
             $table->timestamps();
         });

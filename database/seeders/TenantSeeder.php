@@ -13,6 +13,21 @@ class TenantSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Tenant::create([
+            'tenant_name' => 'Barclays',
+            'tenant_service' => 'Banking',
+        ]);
+
+        Tenant::create([
+            'tenant_name' => 'Vodafone',
+            'tenant_service' => 'Telecom',
+        ]);
+
+        Tenant::create([
+            'tenant_name' => 'Three',
+            'tenant_service' => 'Telecom',
+        ]);
+
+        
     }
 }

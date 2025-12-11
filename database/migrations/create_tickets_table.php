@@ -12,16 +12,23 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tickets', function (Blueprint $table) {
-            $table->id();
+            $table->id('ticket_id');
 
             // Multi-tenant: each ticket belongs to one tenant (bank/telecom/etc.)
-            $table->foreignId('tenant_id')->constrained('tenants');
+            $table->foreignId('tenant_id')
+            ->references('tenant_id')
+            ->on('tenants')
+            ->cascadeOnDelete();
 
             
-            $table->foreignId('consumer_id')->constrained('users');
+            $table->foreignId('user_id')
+            ->references('user_id')
+            ->on('users')
+            ->cascadeOnDelete()
+            ->cascadeOnUpdate();
 
             
-            $table->foreignId('current_assignee_id')->nullable()->constrained('users');
+            //$table->foreignId('current_assignee_id')->nullable()->constrained('users');
 
             // Table Classes
             $table->string('ticket_category');      
@@ -46,7 +53,7 @@ return new class extends Migration
             $table->timestamp('ticket_closed_at')->nullable();
             $table->timestamps();
             
-            $table->index(['tenant_id', 'consumer_id']);
+            $table->index(['tenant_id', 'user_id']);
         });
     }
 

@@ -12,20 +12,38 @@ return new class extends Migration
     public function up(): void
     {
         // User–role mapping (many-to-many)
-        Schema::create('role_user', function (Blueprint $table) {
-            $table->foreignId('role_id')->constrained('roles')->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+        /*Schema::create('role_user', function (Blueprint $table) {
+            $table->foreignId('role_id')
+            ->references('role_id')
+            ->on('roles')
+            ->cascadeOnDelete()
+            ->cascadeOnUpdate();
 
+            $table->foreignId('user_id')
+            ->references('user_id')
+            ->on('users')
+            ->cascadeOnDelete()
+            ->cascadeOnUpdate();
             $table->primary(['role_id', 'user_id']);
         });
 
         // Role–permission mapping (many-to-many)
         Schema::create('role_permission', function (Blueprint $table) {
-            $table->foreignId('role_id')->constrained('roles')->cascadeOnDelete();
-            $table->foreignId('permission_id')->constrained('permissions')->cascadeOnDelete();
+            $table->foreignId('role_id')
+            ->references('role_id')
+            ->on('roles')
+            ->cascadeOnDelete()
+            ->cascadeOnUpdate();
+
+            $table->foreignId('permission_id')
+            ->references('permission_id')
+            ->on('permissions')
+            ->cascadeOnDelete()
+            ->cascadeOnUpdate();
 
             $table->primary(['role_id', 'permission_id']);
         });
+        */
     }
 
     /**
