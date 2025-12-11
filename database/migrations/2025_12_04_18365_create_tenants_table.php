@@ -13,13 +13,8 @@ return new class extends Migration
     {
         Schema::create('tenants', function (Blueprint $table) {
             $table->id();
-
             $table->string('tenant_name');
-
-            $table->enum('tenant_type', ['bank', 'telecom'])->nullable();
-
-            $table->boolean('tenant_is_active')->default(true);
-
+            $table->enum('tenant_service', ['bank', 'telecom'])->nullable();
             $table->timestamps();
         });
     }

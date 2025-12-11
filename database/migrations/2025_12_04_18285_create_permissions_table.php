@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('permissions', function (Blueprint $table) {
             $table->id();
 
-            // Role name, e.g. consumer, agent, support, manager, admin
-            $table->string('name');
-            $table->text('description')->nullable();
+            // System-wide permission key, e.g. ticket.create, ticket.update_status
+            $table->string('name')->unique();
+
+            $table->string('description')->nullable();
+
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('permissions');
     }
 };

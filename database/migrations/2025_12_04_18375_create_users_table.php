@@ -20,22 +20,12 @@ return new class extends Migration
             // Basic identity
             $table->string('name');
             $table->string('email')->unique();
-
             $table->string('phone_number')->nullable();
-
             $table->string('password');
-
-            $table->enum('role', [
-                'consumer',
-                'agent',
-                'support',
-                'manager',
-                'admin',
-            ])->index();
+            $table->foreignId('role_id')->constrained('roles')->index();
 
             // Active flag for manageability/security
             $table->boolean('is_active')->default(true);
-
             $table->rememberToken();
             $table->timestamps();
         });
