@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             TenantSeeder::class,
             UserSeeder::class,
-            //TicketSeeder::class,
+            TicketSeeder::class,
         ]);
 
     }

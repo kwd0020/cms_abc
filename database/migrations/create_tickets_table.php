@@ -48,9 +48,8 @@ return new class extends Migration
             ])->nullable();
 
             //Ticket Timestamps
-            $table->timestamp('ticket_opened_at');
-            $table->timestamp('ticket_resolved_at')->nullable();
-            $table->timestamp('ticket_closed_at')->nullable();
+            $table->timestamp('ticket_created_at')->useCurrent();
+            $table->timestamp('ticket_updated_at')->useCurrent()->useCurrentOnUpdate();
             $table->timestamps();
             
             $table->index(['tenant_id', 'user_id']);

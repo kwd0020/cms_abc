@@ -10,8 +10,8 @@
     <header>
         <nav>
            <h1>ABC Limited</h1>
-           <a href="/tickets"> All Tickets</a>
-           <a href="/users"> All Users </a>
+           <a href="{{ route('tickets.index') }}"> All Tickets</a>
+           <a href="{{ route('users.index') }}"> All Users </a>
            <a href="/tickets/create"> Create New Ticket </a>
         </nav>
     </header>

@@ -1,48 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TicketController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/tickets', function() {
-    $tickets = [
-        ["title" => "Unauthorized Transaction","status" => "open", "ticket_id" => "1"],
-        ["title" => "Connection Error","status" => "closed", "ticket_id" => "2"],
-    ];
-    return view('tickets.index', ["greeting" => "hello", "tickets" => $tickets]);
-});
+//Ticket Routes
+Route::get('/tickets', [TicketController::class, 'index'])->name('tickets.index');
+Route::get('/tickets/create', [TicketController::class, 'create'])->name('tickets.create');
+Route::get('/tickets/{ticket_id}', [TicketController::class, 'show'])->name('tickets.show');
 
-Route::get('/tickets/create', function () {
-    return view('tickets.create');
-});
-
-
-Route::get('/tickets/{ticket_id}', function($ticket_id) {
-    return view('tickets.show', ["ticket_id" => $ticket_id]);
-});
-
-Route::get('/users', function() {
-    $users = [
-        ["name" => "josh","role" => "System Admin", "user_id" => "1"],
-        ["name" => "tyrell","role" => "Helpdesk Agent", "user_id" => "2"],
-    ];
-    return view('users.index', ["greeting" => "hello", "users" => $users]);
-});
-
-Route::get('/users/{user_id}', function($user_id) {
-    return view('users.show', ["user_id" => $user_id]);
-});
-
-Route::get('/tenants', function() {
-    $tenants = [
-        ["name" => "Barclays","service" => "Banking", "tenant_id" => "1"],
-        ["name" => "Vodafone","service" => "Telecom", "tenant_id" => "2"],
-    ];
-    return view('tenants.index', ["greeting" => "hello", "tenants" => $tenants]);
-});
-
-Route::get('/tenants/{tenant_id}', function($tenant_id) {
-    return view('tenants.show', ["tenant_id" => $tenant_id]);
-});
+//User Routes
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/{user_id}', [UserController::class, 'show'])->name('users.index');
