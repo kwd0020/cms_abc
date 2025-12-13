@@ -12,7 +12,12 @@ class TicketController extends Controller
         return view('tickets.index', ["tickets" => $tickets]);
     }
 
-    public function show($id) {
+    public function show($ticket_id) {
+        $ticket = Ticket::findOrFail($ticket_id);
+        return view('tickets.show', ["ticket" => $ticket]);
+    }
 
+    public function create(){
+        return view('tickets.create');
     }
 }

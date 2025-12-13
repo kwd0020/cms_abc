@@ -8,19 +8,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/tickets', [TicketController::class, 'index']);
+//Ticket Routes
+Route::get('/tickets', [TicketController::class, 'index'])->name('tickets.index');
+Route::get('/tickets/create', [TicketController::class, 'create'])->name('tickets.create');
+Route::get('/tickets/{ticket_id}', [TicketController::class, 'show'])->name('tickets.show');
 
-Route::get('/tickets/create', function () {
-    return view('tickets.create');
-});
-
-
-Route::get('/tickets/{ticket_id}', function($ticket_id) {
-    return view('tickets.show', ["ticket_id" => $ticket_id]);
-});
-
-Route::get('/users', [UserController::class, 'index']); 
-
-Route::get('/users/{user_id}', function($user_id) {
-    return view('users.show', ["user_id" => $user_id]);
-});
+//User Routes
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/{user_id}', [UserController::class, 'show'])->name('users.index');

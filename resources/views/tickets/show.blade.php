@@ -1,4 +1,14 @@
 <x-dashboard>
-    <h2> Ticket id - {{$ticket_id}}</h2>
+    <h2> Ticket id - {{$ticket->ticket_id}}</h2>
+
+    <div class="bg-gray-200 p-4 rounded">
+        <p><strong>Title: </strong> {{$ticket->ticket_title}}</p>
+        <p><strong>Category:  </strong> {{$ticket->ticket_category}}</p>
+        <p><strong>Description: </strong> {{$ticket->ticket_description}}</p>
+        <p><strong>Priority: </strong> {{$ticket->ticket_priority}}</p>
+        <p><strong>Status: </strong> {{$ticket->ticket_status}}</p>
+        <p><strong>Created At: </strong> {{$ticket->ticket_created_at}}</p>
+        <p><strong>Last Updated: </strong> {{$ticket->ticket_updated_at}}</p>
+    </div>
 </x-dashboard>
     
