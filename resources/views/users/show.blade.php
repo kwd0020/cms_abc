@@ -5,7 +5,8 @@
         <p><strong>Name: </strong> {{$user->user_name}}</p>
         <p><strong>Email:  </strong> {{$user->user_email}}</p>
         <p><strong>Phone Number: </strong> {{$user->phone_number}}</p>
-        <p><strong>Role ID: </strong> {{$user->role_id}}</p>
+        <p><strong>Role: </strong> {{$user->role->role_name}}</p>
+        <p><strong>Company: </strong> {{$user->tenant->tenant_name}} </p>
 
     </div>
 

@@ -8,7 +8,7 @@ use App\Models\Ticket;
 class TicketController extends Controller
 {
     public function index() {
-        $tickets = Ticket::orderBy('created_at', 'desc')->get();
+        $tickets = Ticket::with('user', 'tenant')->orderBy('created_at', 'desc')->paginate(20);
         return view('tickets.index', ["tickets" => $tickets]);
     }
 
