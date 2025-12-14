@@ -12,5 +12,11 @@
         <p><strong>Created At: </strong> {{$ticket->ticket_created_at}}</p>
         <p><strong>Last Updated: </strong> {{$ticket->ticket_updated_at}}</p>
     </div>
+
+    <form action="{{ route('tickets.destroy', $ticket->ticket_id) }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn my-4">Delete Ticket </button>
+    </form>
 </x-dashboard>
     
