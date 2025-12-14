@@ -49,7 +49,7 @@ return new class extends Migration
 
             //Ticket Timestamps
             $table->timestamp('ticket_created_at')->useCurrent();
-            $table->timestamp('ticket_updated_at')->useCurrent()->useCurrentOnUpdate();
+            $table->timestamp('ticket_updated_at')->useCurrent()->useCurrentOnUpdate()->nullable();
             $table->timestamps();
             
             $table->index(['tenant_id', 'user_id']);

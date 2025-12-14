@@ -10,6 +10,19 @@ class Ticket extends Model
     /** @use HasFactory<\Database\Factories\TicketFactory> */
     use HasFactory;
     protected $primaryKey = 'ticket_id';
+    protected $fillable = [
+        'tenant_id',
+        'user_id',
+        'ticket_title',
+        'ticket_description',
+        'ticket_category',
+        'ticket_priority',
+        'ticket_status',
+        'ticket_created_at',
+        'ticket_updated_at',
+    ];
+    public const categories = ['Billing', 'Query', 'Technical'];
+    public const priorities = ['low', 'medium', 'high', 'urgent'];
 
     public function user()
     {
@@ -20,4 +33,6 @@ class Ticket extends Model
     {
         return $this->belongsTo(Tenant::class, 'tenant_id', 'tenant_id');
     }
+
+    
 }
