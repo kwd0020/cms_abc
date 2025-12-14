@@ -1,6 +1,10 @@
 <x-dashboard>
-    <h2> Ticket id - {{$ticket->ticket_id}}</h2>
+    
+    <div class="flex justify-between items-center mb-4">
+       <h2> Ticket id - {{$ticket->ticket_id}}</h2>
 
+       <a href="{{ route('tickets.edit', $ticket->ticket_id) }}" class="btn">Update Ticket</a>
+    </div>
     <div class="bg-gray-200 p-4 rounded">
         <p><strong>Company: {{$ticket->tenant->tenant_name}}</strong></p>
         <p><strong>Title: {{$ticket->ticket_title}}</strong> </p>
@@ -18,5 +22,6 @@
         @method('DELETE')
         <button type="submit" class="btn my-4">Delete Ticket </button>
     </form>
+
 </x-dashboard>
     
