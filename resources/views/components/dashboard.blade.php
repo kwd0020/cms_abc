@@ -14,6 +14,9 @@
            <a href="{{ route('tickets.index') }}"> All Tickets</a>
            <a href="{{ route('users.index') }}"> All Users </a>
            <a href="/tickets/create"> Create New Ticket </a>
+
+           <a href="{{ route('show.register') }}" class="btn">Register </a>
+           <a href="{{ route('show.login') }}" class="btn">Login </a>
         </nav>
     </header>
     

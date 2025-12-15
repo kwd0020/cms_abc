@@ -71,7 +71,9 @@
             @endforeach
         </select>
 
-        <button type="submit" class="btn mt-4">Update Ticket</button>
+        <div class="text-center">
+            <button type="submit" class="btn mt-4">Update Ticket</button>
+        </div>
     
     </form>
 
