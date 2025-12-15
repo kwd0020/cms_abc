@@ -11,7 +11,7 @@
                             {{$user->user_name}} | 
                             {{$user->user_email}}  
                         </h3>
-                        <p>{{ $user->role->role_name }}</p>
+                        <p>{{ $user->tenant->tenant_name }} | {{ $user->role->role_name }} </p>
                             
                     </div>
                     

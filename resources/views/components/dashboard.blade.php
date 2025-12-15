@@ -9,14 +9,30 @@
 
     
     <header>
-        <nav>
-           <h1>ABC Limited</h1>
-           <a href="{{ route('tickets.index') }}"> All Tickets</a>
-           <a href="{{ route('users.index') }}"> All Users </a>
-           <a href="/tickets/create"> Create New Ticket </a>
+        <nav class="mx-auto flex items-center justify-between px-6 py-3">
+            <a href="{{route('tickets.index')}}"><h1>ABC Limited</h1></a>
+            
+            <div class="flex items-center gap-4">
+                @guest
+                    <a href="{{ route('show.register') }}" class="btn">Register </a>
+                    <a href="{{ route('show.login') }}" class="btn">Login </a>
+                @endguest
 
-           <a href="{{ route('show.register') }}" class="btn">Register </a>
-           <a href="{{ route('show.login') }}" class="btn">Login </a>
+                <!--Only show when authenticated-->
+                @auth
+                    <a href="{{ route('tickets.index') }}"> All Tickets</a>
+                    <a href="{{ route('users.index') }}"> All Users </a>
+                    <a href="/tickets/create"> Create New Ticket </a>
+                    
+                    <span class="border-r-2 pr-2">
+                        Welcome, {{ Auth::user()->user_name }}
+                    </span>
+                    <form action="{{route('logout') }}" method="POST" class="m-0">
+                        @csrf
+                        <button class="btn">Logout</button>
+                    </form>
+                @endauth
+            </div>
         </nav>
     </header>
     
