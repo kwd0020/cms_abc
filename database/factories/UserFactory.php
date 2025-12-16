@@ -23,6 +23,16 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+    public function systemAdmin(): static{
+        $role = Role::where('role_slug', 'system_admin')->firstOrFail();
+
+        return $this->state(fn () => [
+            'role_id'   => $role->role_id,
+            'tenant_id' => null,
+        ]);
+    }
+    
     public function definition(): array
     {
         return [
@@ -31,19 +41,18 @@ class UserFactory extends Factory
             'phone_number' => fake()->unique()->numerify('07#########'),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
-            'role_id' => Role::inRandomOrder()->value('role_id'),
-            'tenant_id' => Tenant::inRandomOrder()->value('tenant_id'),
             'is_active' => true,
+            // don’t set role_id/tenant_id here; set via states/for() below
         ];
     }
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     */
-    public function unverified(): static
+    public function forTenant(Tenant $tenant): static
     {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
+        return $this->state(fn () => ['tenant_id' => $tenant->tenant_id]);
+    }
+
+    public function withRole(Role $role): static
+    {
+        return $this->state(fn () => ['role_id' => $role->role_id]);
     }
 }

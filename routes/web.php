@@ -5,12 +5,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 
-use function Pest\Laravel\patch;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', fn () => view('welcome'))
+    ->middleware('guest')
+    ->name('welcome');
 
 //Authentication Routes
 Route::middleware('guest')->controller(AuthController::class)->group(function(){
@@ -36,7 +35,7 @@ Route::middleware('auth')->controller(TicketController::class)->group(function (
 
 //User Routes
 Route::middleware('auth')->controller(UserController::class)->group(function (){
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
-    Route::get('/users/{user_id}', [UserController::class, 'show'])->name('users.show');
+    Route::get('/users',  'index')->name('users.index');
+    Route::get('/users/{user}', 'show')->name('users.show');
 });
 

@@ -8,16 +8,32 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Role;
 use App\Models\Tenant;
+use App\Models\Scopes\TenantScope;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+
+    protected static function booted(): void{
+        static::addGlobalScope(new TenantScope);
+    }
+
+       /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
+    public function hasRole(string $roleSlug): bool
+    {
+        if(! $this->relationLoaded('role')){
+            $this->load('role');
+        }
+
+        return $this->role && $this->role->role_slug === $roleSlug;
+    } 
+
     protected $primaryKey = 'user_id';    /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
      */
+
     protected $fillable = [
         'tenant_id',
         'role_id',
@@ -25,7 +41,7 @@ class User extends Authenticatable
         'user_email',
         'password',
     ];
-
+ 
     /**
      * The attributes that should be hidden for serialization.
      *

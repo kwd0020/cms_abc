@@ -16,6 +16,7 @@ return new class extends Migration
 
             // Role name, e.g. consumer, agent, support, manager, admin
             $table->string('role_name');
+            $table->string('role_slug')->unique();
             $table->text('role_description')->nullable();
             $table->timestamps();
         });

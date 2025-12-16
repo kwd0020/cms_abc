@@ -18,7 +18,7 @@ class TicketFactory extends Factory
      */
     public function definition(): array
     {
-        return [
+         return [
             'ticket_title' => fake()->word(),
             'ticket_category' => $this->faker->randomElement([
                 'Billing',
@@ -39,10 +39,15 @@ class TicketFactory extends Factory
                 'medium',
                 'high',
                 'urgent',
-            ]),
-
-            'user_id' => User::inRandomOrder()->value('user_id'),
-            'tenant_id' => Tenant::inRandomOrder()->value('tenant_id'),
+            ]),       
         ];
     }
+
+    public function forUser(User $user): static
+            {
+                return $this->state(fn () => [
+                    'user_id' => $user->user_id,
+                    'tenant_id' => $user->tenant_id,
+                ]);
+            }
 }

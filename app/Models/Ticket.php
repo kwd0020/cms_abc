@@ -4,9 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Scopes\TenantScope;
 
 class Ticket extends Model
 {
+    protected static function booted(): void{
+        static::addGlobalScope(new TenantScope);
+    }
+    
     /** @use HasFactory<\Database\Factories\TicketFactory> */
     use HasFactory;
     protected $primaryKey = 'ticket_id';

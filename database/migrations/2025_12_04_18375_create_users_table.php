@@ -16,8 +16,8 @@ return new class extends Migration
 
             //Reference tenants table for foreign key (tenant_id)
             $table->foreignId('tenant_id')
-            ->references('tenant_id')
-            ->on('tenants')
+            ->nullable()
+            ->constrained('tenants', 'tenant_id')
             ->cascadeOnDelete();
 
             // Basic identity
@@ -26,8 +26,7 @@ return new class extends Migration
             $table->string('phone_number')->nullable();
             $table->string('password');
             $table->foreignId('role_id')
-            ->references('role_id')
-            ->on('roles')
+            ->constrained('roles', 'role_id')
             ->cascadeOnDelete()
             ->cascadeOnUpdate();
 

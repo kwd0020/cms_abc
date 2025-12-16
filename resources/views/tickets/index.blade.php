@@ -13,7 +13,7 @@
                             {{$ticket->ticket_priority}} | 
                             {{$ticket->ticket_status}}
                         </h3>
-                        <p>{{$ticket->user->user_name}} | ID: {{$ticket->user->user_id}}</p>
+                        <p>{{optional($ticket->user)->user_name ?? 'Unknown User'}} | ID: {{optional($ticket->user)->user_id ?? 'Unknown ID'}}</p>
                     </div>
                     
                 </x-card>
