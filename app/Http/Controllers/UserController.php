@@ -37,7 +37,11 @@ class UserController extends Controller
         $this->authorize('create', User::class);
 
         $actor = auth()->user();
-        $roles = Role::orderBy('role_name')->get();
+        $rolesQuery = Role::orderBy('role_name');
+        if ($actor->hasRole('manager')) {
+            $rolesQuery->where('role_slug', '!=', 'system_admin'); // All but system admin
+        }
+        $roles = $rolesQuery->get();
 
         $tenants = $actor->hasRole('system_admin')
         ? Tenant::orderBy('tenant_name')->get()
@@ -56,7 +60,16 @@ class UserController extends Controller
             'user_name'     => ['required', 'string', 'max:255'],
             'user_email'    => ['required', 'email', 'unique:users,user_email'],
             'phone_number'  => ['nullable', 'string', 'min:11'],
-            'role_id'       => ['required', 'integer', 'exists:roles,role_id'],
+            'role_id' => [
+                'required',
+                'integer',
+                Rule::exists('roles', 'role_id')->where(function ($q) use ($actor) {
+                    if ($actor->hasRole('manager')) {
+                        $q->where('role_slug', '!=', 'system_admin'); // Restrict managers from assigning system admin.
+                    }
+                }),
+            ],
+            
             'password'      => ['required', 'string', 'min:8', 'confirmed'],
         ];
 
@@ -83,7 +96,11 @@ class UserController extends Controller
 
         $actor = auth()->user();
 
-        $roles = Role::orderBy('role_name')->get();
+        $rolesQuery = Role::orderBy('role_name');
+        if ($actor->hasRole('manager')) {
+            $rolesQuery->where('role_slug', '!=', 'system_admin'); // All but system admin
+        }
+        $roles = $rolesQuery->get();
 
         // Only system admins see tenant dropdown
         $tenants = $actor->hasRole('system_admin')
@@ -98,8 +115,6 @@ class UserController extends Controller
         $this->authorize('update', $user);
         $actor = $request->user();
 
-        
-
         $rules = [
             'user_name' => ['required', 'string', 'max:255'],
             'user_email' => [
@@ -107,7 +122,15 @@ class UserController extends Controller
                 Rule::unique('users', 'user_email')->ignore($user->user_id, 'user_id'),
             ],
             'phone_number' => ['nullable', 'string', 'min:11'],
-            'role_id'   => ['required', 'integer'],
+            'role_id' => [
+                'required',
+                'integer',
+                Rule::exists('roles', 'role_id')->where(function ($q) use ($actor) {
+                    if ($actor->hasRole('manager')) {
+                        $q->where('role_slug', '!=', 'system_admin'); // Restrict managers from assigning admins.
+                    }
+                }),
+            ],
         ];
 
         //Only System Admin can change users tenant.
