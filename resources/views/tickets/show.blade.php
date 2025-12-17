@@ -1,5 +1,14 @@
 <x-dashboard>
-    
+     <!--Validation Errors -->
+        @if ($errors->any())
+            <div>
+                <ul class="px-4 py-2 bg-red-100">
+                    @foreach ($errors->all() as $message)
+                        <li class="my-2 text-red-500"> {{ $message }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
     <div class="flex justify-between items-center mb-4">
        <h2> Ticket id - {{$ticket->ticket_id}}</h2>
 

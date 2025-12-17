@@ -39,9 +39,7 @@ class UserPolicy
      */
     public function create(User $actor): bool
     {
-        return true;
-        //return $actor->hasRole('system_admin')
-        //    || $actor->hasRole('manager');
+        return $actor->hasRole('system_admin') || $actor->hasRole('manager');
     }
 
     /**
