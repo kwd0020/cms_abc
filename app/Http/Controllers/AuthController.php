@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Tenant;
 use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
@@ -37,7 +38,7 @@ class AuthController extends Controller
         'user_email' => $data['user_email'],
         'role_id' => $data['user_role'],
         'tenant_id' => $data['user_tenant'],
-        'password' => $data['password'],
+        'password' => Hash::make($data['password']),
         ]);
 
         Auth::login($user);
@@ -50,15 +51,18 @@ class AuthController extends Controller
             'user_email' => 'required|email',
             'password' => 'required|string'
         ]);
+        if(! Auth::attempt($data)){
+            throw ValidationException::withMessages([
+                'credentials' => 'Incorrect credentials provided.'
+            ]);
+        } 
 
-        if(Auth::attempt($data)){
-            $request->session()->regenerate();
-
-            return redirect()->route('tickets.index');
+        $request->session()->regenerate();
+        $user = $request->user();
+        if ($user->hasRole('system_admin') || $user->hasRole('manager')) {
+            return redirect()->route('users.index');   // your admin/manager landing page
         }
-        throw ValidationException::withMessages([
-            'credentials' => 'Incorrect credentials provided.'
-        ]);
+        return redirect()->route('tickets.index'); 
     }
 
     public function logout(Request $request){

@@ -66,11 +66,12 @@
         </form>
     @endcan
 
-    <form action="{{ route('tickets.destroy', $ticket->ticket_id) }}" method="POST">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn my-4">Delete Ticket </button>
-    </form>
-
+    @can('delete', $ticket)
+        <form action="{{ route('tickets.destroy', $ticket->ticket_id) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn my-4">Delete Ticket </button>
+        </form>
+    @endcan
 </x-dashboard>
     

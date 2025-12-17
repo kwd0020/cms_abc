@@ -13,9 +13,11 @@ class TicketController extends Controller
 {
 
     public function index(Request $request) {
+        
         $this->authorize('viewAny', Ticket::class);
         $query = Ticket::with('user', 'tenant', 'assignee')->orderBy('created_at', 'desc');
         $pageTitle = 'All Tickets';
+
         //Consumers only see their own complaint.
         if(auth()->user()->hasRole('consumer')){
             $query->where('user_id', auth()->user()->user_id);
@@ -210,6 +212,7 @@ class TicketController extends Controller
 
     public function destroy(Ticket $ticket) {
         $this->authorize('delete', $ticket);
+        
         $ticket->delete();
         return redirect()->route('tickets.index')->with('success', 'Ticket Deleted');
     }

@@ -1,5 +1,6 @@
 <x-dashboard>
     <h2> User id - {{$user->user_id}}</h2>
+   
 
     <div class="bg-gray-200 p-4 rounded">
         <p><strong>Name: </strong> {{$user->user_name}}</p>
@@ -9,5 +10,10 @@
         <p><strong>Company: </strong> {{$user->tenant->tenant_name}} </p>
 
     </div>
+    @can('update', $user)
+        <div class="mt-4 flex justify-center">
+            <a href="{{ route('users.edit', $user->user_id) }}" class="btn">Edit</a>
+        </div>
+    @endcan
 
 </x-dashboard>

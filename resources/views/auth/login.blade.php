@@ -3,7 +3,7 @@
     <div class="form-wrapper">
         <form action="login" method="POST">
             @csrf
-        <!--Validation Errors -->
+            <!--Validation Errors -->
             @if ($errors->any())
                 <div>
                     <ul class="px-4 py-2 bg-red-100">

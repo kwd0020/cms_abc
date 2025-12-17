@@ -18,7 +18,15 @@ class TenantScope implements Scope
         if(! Auth::hasUser()) {
             return;
         }
+        $actor = Auth::user();
 
-        $builder->where($model->getTable().'.tenant_id', Auth::user()->tenant_id);
+        if ($actor->hasRole('system_admin') &&
+            method_exists($model, 'bypassTenantScopeForAdmin') &&
+            $model->bypassTenantScopeForAdmin()
+        ){
+            return;
+        }
+        $builder->where($model->getTable().'.tenant_id', $actor->tenant_id);
     }
 }
+

@@ -24,12 +24,14 @@ class UserPolicy
      */
     public function view(User $actor, User $model): bool
     {
-        if($actor->tenant_id !== $model->tenant_id) { return false;}
+        if($actor->hasRole('system_admin')) { return true;}
 
-        return $actor->hasRole('system_admin')
-            || $actor->hasRole('manager')
-            || $actor->hasRole('agent')
-            || $actor->hasRole('support_person');
+        return $actor->tenant_id === $model->tenant_id
+            && (
+                $actor->hasRole('manager')
+                || $actor->hasRole('agent')
+                || $actor->hasRole('support_person')
+            );
     }
 
     /**
@@ -47,8 +49,18 @@ class UserPolicy
      */
     public function update(User $actor, User $model): bool
     {
+        if($actor->hasRole('system_admin')){
+            return true;
+        }
+
+
         return $actor->tenant_id == $model->tenant_id
             && $actor->hasRole('manager');
+    }
+
+    public function changeTenant(User $actor, User $model): bool
+    {
+        return $actor->hasRole('system_admin');
     }
 
     /**

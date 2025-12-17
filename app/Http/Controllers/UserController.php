@@ -2,20 +2,85 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Role;
+use App\Models\Tenant;
+use App\Models\Scopes\TenantScope;
+
 
 class UserController extends Controller
 {
     public function index() {
+
         $this->authorize('viewAny', User::class);
-        $users = User::with('role', 'tenant')->where('tenant_id', auth()->user()->tenant_id)->orderBy('user_id', 'asc')->paginate(10);
-        return view('users.index', ["users" => $users]);
+        $actor = auth()->user();
+        $query = User::with('role', 'tenant')->orderBy('user_id', 'asc');
+
+        if (! $actor->hasRole('system_admin')) {
+        // show all users
+            $query->where('tenant_id', $actor->tenant_id);
+        }
+       
+        $users = $query->paginate(10);
+        return view('users.index', compact('users'));
     }
 
     public function show(User $user) {
         $this->authorize('view', $user);
         return view('users.show', ["user" => $user]);
+    }
+
+    public function edit(User $user){
+        $this->authorize('update', $user);
+
+        $actor = auth()->user();
+
+        $roles = Role::orderBy('role_name')->get();
+
+        // Only system admins see tenant dropdown
+        $tenants = $actor->hasRole('system_admin')
+            ? Tenant::orderBy('tenant_name')->get()
+            : collect(); // or null
+
+        return view('users.edit', compact('user', 'roles', 'tenants', 'actor'));
+    }
+
+    public function update(Request $request, User $user){
+
+        $this->authorize('update', $user);
+        $actor = $request->user();
+
+        
+
+        $rules = [
+            'user_name' => ['required', 'string', 'max:255'],
+            'user_email' => [
+                'required', 'email',
+                Rule::unique('users', 'user_email')->ignore($user->user_id, 'user_id'),
+            ],
+            'phone_number' => ['nullable', 'string', 'min:11'],
+            'role_id'   => ['required', 'integer'],
+        ];
+
+        //Only System Admin can change users tenant.
+        if ($actor->hasRole('system_admin')) {
+            $rules['tenant_id'] = ['required', 'integer', 'exists:tenants,tenant_id'];
+        
+        }if ($request->filled('tenant_id')) {
+            $this->authorize('changeTenant', $user);
+        }
+
+        //Drop any attempts trying to change tenant ID manually
+        $validated = $request->validate($rules);
+        if (! $actor->hasRole('system_admin')) {
+            unset($validated['tenant_id']);
+        }
+
+        $user->update($validated);
+
+        return redirect()->route('users.show', $user)->with('success', 'User Updated');
     }
 
 

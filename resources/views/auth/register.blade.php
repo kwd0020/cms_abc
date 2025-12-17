@@ -21,6 +21,9 @@
             <label for="email">Email: </label>
             <input type="email" name="user_email" required value="{{ old('user_email') }}">
 
+            <label for="phone_number">Phone Number</label>
+            <input type="" id="user_name" name="user_name" value="{{old('user_name', $user->user_name)}}" required>
+
             <label for="user_tenant">Select A Company</label>
             <select name="user_tenant" id="user_tenant" required>
                 <option value="" disabled selected>Select a Company</option>

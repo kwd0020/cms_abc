@@ -14,14 +14,13 @@ use App\Models\Scopes\TenantScope;
 class User extends Authenticatable
 {
 
-    protected static function booted(): void{
-        static::addGlobalScope(new TenantScope);
+    public function bypassTenantScopeForAdmin(): bool{
+        return true;
     }
 
        /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
-    public function hasRole(string $roleSlug): bool
-    {
+    public function hasRole(string $roleSlug): bool{
         if(! $this->relationLoaded('role')){
             $this->load('role');
         }
@@ -40,6 +39,7 @@ class User extends Authenticatable
         'role_id',
         'user_name',
         'user_email',
+        'phone_number',
         'password',
     ];
  
@@ -58,20 +58,17 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
-    protected function casts(): array
-    {
+    protected function casts(): array{
         return [
             'password' => 'hashed',
         ];
     }
 
-    public function role()
-    {
+    public function role() {
         return $this->belongsTo(Role::class, 'role_id', 'role_id');
     }
     
-    public function tenant()
-    {
+    public function tenant() {
         return $this->belongsTo(Tenant::class, 'tenant_id', 'tenant_id');
     }
 }

@@ -90,9 +90,10 @@ class TicketPolicy
      */
     public function delete(User $user, Ticket $ticket): bool
     {
-        return $this->sameTenant($user, $ticket) && $user->hasRole('manager');
+        if ($user->hasRole('system_admin')) return false;
+        if ($user->tenant_id !== $ticket->tenant_id) return false;
 
-
+        return $user->hasRole('manager');
     }
 
     /**
