@@ -1,5 +1,5 @@
 <x-dashboard>
-    <h2> All Tickets </h2>
+    <h2> {{ $pageTitle }} </h2>
 
     <div class="page-card">
   

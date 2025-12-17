@@ -15,13 +15,14 @@ class UserSeeder extends Seeder
      */
     public function run(): void{
 
-        // 1) Global system admin (tenant_id = null)
+        // Global system admin (tenant_id = null)
         User::factory()->systemAdmin()->create([
             'user_email' => 'admin@example.com',
         ]);
         $tenants = Tenant::all();
         $roles = Role::whereIn('role_slug', ['manager', 'agent', 'support_person', 'consumer'])->get();
 
+        // Seeds 20 users with random tenants and roles.
         User::factory()
             ->count(20)
             ->state(fn () => [

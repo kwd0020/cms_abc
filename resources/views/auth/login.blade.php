@@ -13,6 +13,7 @@
                     </ul>
                 </div>
             @endif
+        <!--------->
             <h2>Login</h2>
 
             <label for="email">Email: </label>

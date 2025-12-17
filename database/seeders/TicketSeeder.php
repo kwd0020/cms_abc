@@ -13,7 +13,7 @@ class TicketSeeder extends Seeder
      */
 
     public function run(): void {
-        // Exclude system admin from having tickets.
+        // Exclude system admin from having tickets assigned to them.
         $users = User::whereNotNull('tenant_id')->get();
 
         foreach ($users as $user) {

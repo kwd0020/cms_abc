@@ -11,17 +11,17 @@ use Illuminate\Validation\Rule;
 class TicketController extends Controller
 {
 
-    
-
     public function index() {
         $this->authorize('viewAny', Ticket::class);
         $query = Ticket::with('user', 'tenant')->orderBy('created_at', 'desc');
+        $pageTitle = 'All Tickets';
 
         if(auth()->user()->hasRole('consumer')){
             $query->where('user_id', auth()->user()->user_id);
+            $pageTitle = 'My Complaints';
         }
         $tickets = $query->paginate(20);
-        return view('tickets.index', ["tickets" => $tickets]);
+        return view('tickets.index', compact('tickets', 'pageTitle'));
     }
 
     public function show(Ticket $ticket) {
@@ -90,30 +90,7 @@ class TicketController extends Controller
             'ticket_description' => 'required|string|max:255',
             'ticket_category' => 'required|in:' . implode(',', Ticket::categories),
             'ticket_priority'  => 'required|in:' . implode(',', Ticket::priorities),
-            'assigned_user_id' => 'nullable',
-                'integer',
-                Rule::exists('users', 'user_id')->where(fn ($q) =>
-                    $q->where('tenant_id', auth()->user()->tenant_id)
-                ),
         ]);
-
-        //Ensure that none othher than accepted roles can assign a user to a ticket.
-        if ($request->has('assigned_user_id')) {
-        $this->authorize('assign', $ticket);
-
-            if (!empty($data['assigned_user_id'])) {
-                $isAssignable = User::whereKey($data['assigned_user_id'])
-                    ->where('tenant_id', auth()->user()->tenant_id)
-                    ->whereHas('role', fn ($q) => $q->whereIn('role_slug', ['support_person', 'agent']))
-                    ->exists();
-
-                if (! $isAssignable) {
-                    return back()->withErrors([
-                        'assigned_user_id' => 'Selected user is not assignable.',
-                    ])->withInput();
-                }
-            }
-        }
 
 
         $ticket->update([
@@ -121,7 +98,6 @@ class TicketController extends Controller
             'ticket_description' => $data['ticket_description'],
             'ticket_category' => $data['ticket_category'],
             'ticket_priority' => $data['ticket_priority'],
-            'assigned_user_id' => $data['assigned_user_id'] ?? $ticket->assigned_user_id, //Nullable
             'ticket_updated_at'  => now(),
         ]);
 
