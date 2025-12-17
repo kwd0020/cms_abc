@@ -28,18 +28,21 @@ class AuthController extends Controller
         $data = $request->validate([
             'user_name' => 'required|string|max:100',
             'user_email' => 'required|email|unique:users',
-            'user_role' => 'required|integer|exists:roles,role_id',
             'user_tenant' => 'required|integer|exists:tenants,tenant_id',
             'password'=> 'required|string|min:8|confirmed',
         ]);
+        
+        $consumerRoleId = Role::where('role_name', 'consumer')->value('role_id');
 
         $user = User::create([
         'user_name' => $data['user_name'],
         'user_email' => $data['user_email'],
-        'role_id' => $data['user_role'],
+        'role_id' => $consumerRoleId,
         'tenant_id' => $data['user_tenant'],
         'password' => Hash::make($data['password']),
         ]);
+
+        
 
         Auth::login($user);
         return redirect()->route('users.index')->with('success', 'User Created');

@@ -41,6 +41,7 @@ Route::middleware('auth')->controller(TicketController::class)->group(function (
 //User Routes
 Route::middleware('auth')->controller(UserController::class)->group(function (){
     Route::get('/users',  'index')->name('users.index');
+    Route::get('/users/create', 'create')->name('users.create');
     Route::get('/users/{user}', 'show')->name('users.show');
     Route::POST('/users', 'store')->name('users.store');
     Route::get('/users/{user}/edit', 'edit')->name('users.edit');

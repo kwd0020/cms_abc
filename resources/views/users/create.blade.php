@@ -1,7 +1,7 @@
 <x-dashboard>
 
     <div class="form-wrapper">
-        <form action="{{ route('register') }}" method="POST">
+        <form action="{{ route('users.store') }}" method="POST">
             @csrf
             <!--Validation Errors -->
             @if ($errors->any())
@@ -22,17 +22,32 @@
             <input type="email" name="user_email" required value="{{ old('user_email') }}">
 
             <label for="phone_number">Phone Number</label>
-            <input type="" id="user_name" name="user_name" value="{{old('user_name', $user->user_name)}}" required>
+            <input type="tel" id="phone_number" name="phone_number" value="{{old('phone_number')}}" required>
 
-            <label for="user_tenant">Select A Company</label>
-            <select name="user_tenant" id="user_tenant" required>
-                <option value="" disabled selected>Select a Company</option>
-                @foreach($tenants as $tenant)
-                    <option value="{{ $tenant->tenant_id }}" {{ (int) old('user_tenant', $tenant->tenant_id) == (int) $tenant->tenant_id ? 'selected' : '' }}>
-                        {{$tenant->tenant_name }}
+            @can('changeTenant', App\Models\User::class)
+                <label for="tenant_id">Select A Company</label>
+                <select name="tenant_id" id="tenant_id" required>
+                    <option value="" disabled selected>Select a Company</option>
+                    @foreach($tenants as $tenant)
+                        <option value="{{ $tenant->tenant_id }}" {{ (int) old('tenant_id', $tenant->tenant_id) == (int) $tenant->tenant_id ? 'selected' : '' }}>
+                            {{$tenant->tenant_name }}
+                        </option>
+                    @endforeach
+                </select>
+            @endcan
+
+       
+            <label for="user_role">Assign A Role</label>
+            <select name="role_id" id="role_id" required>
+                <option value="" disabled selected>Select a Role</option>
+                @foreach($roles as $role)
+                    <option value="{{ $role->role_id }}" {{ (int) old('role_id', $role->role_id) == (int) $role->role_id ? 'selected' : '' }}>
+                        {{$role->role_name }}
                     </option>
                 @endforeach
             </select>
+
+
                 
             <label for="password">Password: </label>
             <input type="password" name="password" id="password" required>

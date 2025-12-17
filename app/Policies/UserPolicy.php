@@ -58,7 +58,7 @@ class UserPolicy
             && $actor->hasRole('manager');
     }
 
-    public function changeTenant(User $actor, User $model): bool
+    public function changeTenant(User $actor): bool
     {
         return $actor->hasRole('system_admin');
     }
