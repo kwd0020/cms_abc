@@ -50,10 +50,7 @@ class TicketPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole('consumer')
-            || $user->hasRole('agent')
-            || $user->hasRole('support_person')
-            || $user->hasRole('manager');
+        return $user->hasRole('consumer');
     }
 
     /**
@@ -62,9 +59,18 @@ class TicketPolicy
     public function update(User $user, Ticket $ticket): bool
     {
         if (! $this->sameTenant($user, $ticket)){ return false; }
+        if ($user->hasRole('system_admin')) return false;
         if ($user->hasRole('agent') || $user->hasRole('support_person') || $user->hasRole('manager')) { return true; }
        
         return false;
+    }
+
+    public function assign(User $user, Ticket $ticket): bool
+    {
+        if ($user->hasRole('system_admin')) return false;
+        if (! $this ->sameTenant($user, $ticket)) return false;
+
+        return $user->hasRole('manager') || $user->hasRole('agent');
     }
 
     /**

@@ -22,7 +22,7 @@
                 @auth
                     <a href="{{ route('tickets.index') }}"> All Tickets</a>
                     <a href="{{ route('users.index') }}"> All Users </a>
-                    <a href="tickets.create"> Create New Ticket </a>
+                    <a href="{{route('tickets.create')}}"> Create New Ticket </a>
                     
                     <span class="border-r-2 pr-2">
                         Welcome, {{ auth()->user()->user_name }}

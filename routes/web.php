@@ -30,6 +30,7 @@ Route::middleware('auth')->controller(TicketController::class)->group(function (
     Route::post('/tickets', 'store')->name('tickets.store');
     Route::get('/tickets/{ticket}/edit', 'edit')->name('tickets.edit');
     Route::put('/tickets/{ticket}', 'update')->name('tickets.update');
+    
     Route::delete('/tickets/{ticket}', 'destroy')->name('tickets.destroy');
 });
 

@@ -36,45 +36,105 @@ p {
   @apply my-2;
 }
 
-/* header */
-header {
-  @apply bg-white fixed top-0 left-0 right-0 z-30;
 
-  nav {
-    @apply flex items-center gap-5 max-w-screen-lg px-12 py-4 mx-auto;
+
+@layer components {
+  /* header */
+  header {
+    @apply bg-white fixed top-0 left-0 right-0 z-30;
+
+    nav {
+      @apply flex items-center gap-5 max-w-screen-lg px-12 py-4 mx-auto;
+    }
+    h1 {
+      @apply mr-auto;
+    }
   }
-  h1 {
-    @apply mr-auto;
+
+  .page-wrap {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
+
+
+  /*Table elements */
+  .table-card {
+    @apply mt-4 bg-white shadow-lg rounded-lg ring-1 ring-gray-200;
+  }
+
+  .table-scroll-x {
+    @apply min-w-0 overflow-x-auto;
+  }
+
+  .table-scroll-y {
+    @apply overflow-y-auto;
+    max-height: 70vh; 
+  }
+
+  .table {
+    @apply min-w-max w-full table-auto text-sm text-left;
+  }
+
+  .table thead {
+    @apply bg-gray-50 text-gray-700;
+  }
+
+ .table thead th {
+  position: sticky;
+  top: 0;
+  background: #f9fafb; 
+  z-index: 10;
 }
 
-/* form elements */
-form {
-  @apply max-w-screen-sm;
-}
-.form-wrapper {
-    max-width: 400px;
-    margin: 10px auto;      /* centers horizontally */
-    padding: 20px;
-    border: 1px solid #ccc; /* box border */
-    border-radius: 8px;
-    background: #fff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-input, select, textarea {
-  @apply block w-full mt-2 mb-4 p-2 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-blue-400 focus:border-blue-500;
-}
 
-/* custom classes */
-.container {
-  @apply max-w-screen-lg mx-auto px-12 py-8;
-}
-.card {
-  @apply bg-white rounded border border-gray-200 px-3 py-3 my-2 flex justify-between items-center;
-}
-.highlight {
-  @apply border-l-4 border-l-blue-500;
-}
-.btn {
-  @apply rounded px-3 py-2 bg-gray-200 hover:bg-blue-500 hover:text-white;
+  .table tbody {
+    @apply divide-y divide-gray-300;
+  }
+
+  .table tbody td {
+    @apply px-4 py-3 align-top;
+  }
+
+  .row {
+    @apply bg-white hover:bg-gray-200;
+  }
+
+  .row.is-open {
+    @apply bg-yellow-200;
+  }
+
+  .table-link {
+    @apply text-blue-600 hover:underline;
+  }
+
+
+  /* form elements */
+  form {
+    @apply max-w-screen-sm;
+  }
+  .form-wrapper {
+      max-width: 400px;
+      margin: 10px auto; 
+      padding: 20px;
+      border: 1px solid #ccc; 
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+  input, select, textarea {
+    @apply block w-full mt-2 mb-4 p-2 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-blue-400 focus:border-blue-500;
+  }
+
+  /* custom classes */
+  .container {
+    @apply max-w-screen-lg mx-auto px-12 py-8;
+  }
+  .card {
+    @apply bg-white rounded border border-gray-200 px-3 py-3 my-2 flex justify-between items-center;
+  }
+  .highlight {
+    @apply border-l-4 border-l-blue-500;
+  }
+  .btn {
+    @apply rounded px-3 py-2 bg-blue-200 hover:bg-blue-500 hover:text-white;
+  }
 }
