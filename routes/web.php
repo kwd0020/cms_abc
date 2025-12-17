@@ -32,6 +32,8 @@ Route::middleware('auth')->controller(TicketController::class)->group(function (
     Route::put('/tickets/{ticket}', 'update')->name('tickets.update');
     //Explicit assignment route.
     Route::patch('/tickets/{ticket}/assign', 'assign')->name('tickets.assign');
+    //Status + resolution route.
+    Route::patch('/tickets/{ticket}/status', 'updateStatus')->name('tickets.status');
     
     Route::delete('/tickets/{ticket}', 'destroy')->name('tickets.destroy');
 });

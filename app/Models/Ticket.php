@@ -40,5 +40,9 @@ class Ticket extends Model
         return $this->belongsTo(User::class, 'assigned_user_id', 'user_id');
     }
 
+    public function history(){
+        return $this->hasMany(TicketHistory::class, 'ticket_id', 'ticket_id')->orderByDesc('created_at');
+    }
+
     
 }

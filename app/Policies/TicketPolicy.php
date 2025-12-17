@@ -60,8 +60,20 @@ class TicketPolicy
     {
         if (! $this->sameTenant($user, $ticket)){ return false; }
         if ($user->hasRole('system_admin')) return false;
-        if ($user->hasRole('agent') || $user->hasRole('support_person') || $user->hasRole('manager')) { return true; }
+        if ($user->hasRole('agent') || $user->hasRole('manager')) { return true; }
        
+        return false;
+    }
+
+    public function updateStatus(User $user, Ticket $ticket){
+        if($user->hasRole('system_admin')) return false;
+        if (! $this->sameTenant($user, $ticket)) return false;
+        if ($user->hasRole('agent') || $user->hasRole('manager')) { return true; }
+
+        // Only allow assigned support person to update status
+        if ($user->hasRole('support_person')) {
+            return (int)$ticket->assigned_user_id === (int)$user->user_id;
+        }
         return false;
     }
 
@@ -79,6 +91,7 @@ class TicketPolicy
     public function delete(User $user, Ticket $ticket): bool
     {
         return $this->sameTenant($user, $ticket) && $user->hasRole('manager');
+
 
     }
 

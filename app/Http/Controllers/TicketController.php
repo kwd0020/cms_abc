@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Ticket;
+use App\Models\TicketHistory;
 use App\Models\User;
 use Illuminate\Validation\Rule;
 
@@ -11,22 +12,27 @@ use Illuminate\Validation\Rule;
 class TicketController extends Controller
 {
 
-    public function index() {
+    public function index(Request $request) {
         $this->authorize('viewAny', Ticket::class);
-        $query = Ticket::with('user', 'tenant')->orderBy('created_at', 'desc');
+        $query = Ticket::with('user', 'tenant', 'assignee')->orderBy('created_at', 'desc');
         $pageTitle = 'All Tickets';
-
+        //Consumers only see their own complaint.
         if(auth()->user()->hasRole('consumer')){
             $query->where('user_id', auth()->user()->user_id);
             $pageTitle = 'My Complaints';
         }
-        $tickets = $query->paginate(20);
+        elseif ($request->boolean('mine') && auth()->user()->hasRole('support_person', 'agent')) {
+            $query->where('assigned_user_id', auth()->user()->user_id);
+            $pageTitle = 'Assigned To Me';
+        }
+
+        $tickets = $query->paginate(20)->withQueryString(); //Maintain filter across pages
         return view('tickets.index', compact('tickets', 'pageTitle'));
     }
 
     public function show(Ticket $ticket) {
         $this->authorize('view', $ticket);
-        $ticket->load(['user', 'tenant', 'assignee']);
+        $ticket->load(['user', 'tenant', 'assignee', 'history.changedBy']);
         return view('tickets.show', ["ticket" => $ticket]);
     }
 
@@ -49,17 +55,25 @@ class TicketController extends Controller
         ]);
 
 
-        Ticket::create([
-        'ticket_title' => $data['ticket_title'],
-        'ticket_description' => $data['ticket_description'],
-        'ticket_category' => $data['ticket_category'],
-        'ticket_priority' => $data['ticket_priority'],
-        'user_id' => auth()->user()->user_id,
-        'tenant_id' => auth()->user()->tenant_id,
-        'assigned_user_id' => null,
-        'ticket_status' => 'OPEN',
-        'ticket_created_at' => now(),
-        'ticket_updated_at' => null,
+        $ticket = Ticket::create([
+            'ticket_title' => $data['ticket_title'],
+            'ticket_description' => $data['ticket_description'],
+            'ticket_category' => $data['ticket_category'],
+            'ticket_priority' => $data['ticket_priority'],
+            'user_id' => auth()->user()->user_id,
+            'tenant_id' => auth()->user()->tenant_id,
+            'assigned_user_id' => null,
+            'ticket_status' => 'OPEN',
+            'ticket_created_at' => now(),
+            'ticket_updated_at' => null,
+        ]);
+
+        $ticket->history()->create([
+            'tenant_id' => $ticket->tenant_id,
+            'changed_by_user_id' => auth()->user()->user_id,
+            'from_status' => null,
+            'to_status' => 'OPEN',
+            'resolution_note' => 'Ticket Created',
         ]);
 
         return redirect()->route('tickets.index')->with('success', 'Ticket Created');
@@ -101,7 +115,55 @@ class TicketController extends Controller
             'ticket_updated_at'  => now(),
         ]);
 
+        $ticket->history()->create([
+            'tenant_id' => $ticket->tenant_id,
+            'changed_by_user_id' => auth()->user()->user_id,
+            'from_status' => null,
+            'to_status' => null,
+            'ticket_comment' => 'Ticket details updated',
+            'resolution_note' => null,
+        ]);
+
         return redirect()->route('tickets.show', $ticket->ticket_id)->with('success', 'Ticket Updated');
+    }
+
+
+    public function updateStatus(Request $request, Ticket $ticket)
+    {
+        $this->authorize('updateStatus', $ticket);
+
+        $data = $request->validate([
+            'ticket_status' => ['required', Rule::in(['OPEN','IN_PROGRESS','RESOLVED','CLOSED'])],
+            'ticket_comment' => ['nullable', 'string', 'max:1000'],
+            // Note must be present to close or resolve ticket.
+            'resolution_note' => [
+                Rule::requiredIf(in_array($request->ticket_status, ['RESOLVED', 'CLOSED'], true)),
+                Rule::prohibitedIf(! in_array($request->ticket_status, ['RESOLVED', 'CLOSED'], true)),
+                'nullable',
+                'string',
+                'max:1000',
+            ],
+
+            
+        ]);
+
+        $oldStatus = $ticket->ticket_status;
+
+        $ticket->update([
+            'ticket_status' => $data['ticket_status'],
+            'ticket_updated_at' => now(),
+        ]);
+
+        $ticket->history()->create([
+            'tenant_id' => $ticket->tenant_id,
+            'changed_by_user_id' => auth()->user()->user_id,
+            'from_status' => $oldStatus,
+            'to_status' => $ticket->ticket_status,
+            'ticket_comment' => $data['ticket_comment'] ?? null,
+            'resolution_note' => $data['resolution_note'] ?? null, // only present when status = RESOLVED
+        ]);
+
+        return redirect()->route('tickets.show', $ticket->ticket_id)->with('success', 'Status updated');
     }
 
     public function assign(Request $request, Ticket $ticket){
@@ -127,10 +189,21 @@ class TicketController extends Controller
             }
         }
 
+        $oldAssignee = $ticket->assigned_user_id;
         $ticket->update([
             'assigned_user_id' => $data['assigned_user_id'],
             'ticket_updated_at' => now(),
         ]);
+
+        $ticket->history()->create([
+            'tenant_id' => $ticket->tenant_id,
+            'changed_by_user_id' => auth()->user()->user_id,
+            'from_status' => null,
+            'to_status' => null,
+            'ticket_comment' => 'Assignee changed from '.($oldAssignee ?? 'none').' to '.($data['assigned_user_id'] ?? 'none'),
+            'resolution_note' => null,
+            
+         ]);
 
         return redirect()->route('tickets.show', $ticket->ticket_id)->with('success', 'Ticket Assigned');
     }

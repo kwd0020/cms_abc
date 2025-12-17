@@ -2,8 +2,18 @@
     <h2> {{ $pageTitle }} </h2>
 
     <div class="page-card">
+
+       
   
         <div class="table-wrapper">
+         @if(auth()->user()->hasRole('agent')
+            || auth()->user()->hasRole('support_person')
+            || auth()->user()->hasRole('manager'))
+            <div class="mb-4 flex gap-2">
+                <a class="btn" href="{{ route('tickets.index', ['mine' => 1]) }}">My assigned tickets</a>
+                <a class="btn" href="{{ route('tickets.index') }}">All tickets</a>
+            </div>
+        @endif
             <div class="table-scroll-y">
                 <table class="table">
                     <thead>
