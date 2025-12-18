@@ -1,0 +1,123 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" version="29.2.7">
+  <diagram name="Page-1" id="ZgzH0L7F3rZ3htvO7pRw">
+    <mxGraphModel dx="2279" dy="656" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="xMGN7pVzyZbF6fk4kW2v-7" edge="1" parent="1" source="xMGN7pVzyZbF6fk4kW2v-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" target="xMGN7pVzyZbF6fk4kW2v-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xMGN7pVzyZbF6fk4kW2v-8" connectable="0" parent="xMGN7pVzyZbF6fk4kW2v-7" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=1;points=[];movable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="Makes a call to a staff member / user&amp;nbsp;&lt;div&gt;to report a complaint&lt;/div&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.1192" as="geometry">
+            <mxPoint x="17" y="-37" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Mmb557suDLbXunVjaM3I-1" edge="1" parent="1" source="xMGN7pVzyZbF6fk4kW2v-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="xMGN7pVzyZbF6fk4kW2v-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Mmb557suDLbXunVjaM3I-2" connectable="0" parent="Mmb557suDLbXunVjaM3I-1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" value="Log a Problem to the system" vertex="1">
+          <mxGeometry relative="1" x="0.0094" y="-1" as="geometry">
+            <mxPoint x="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <object c4Name="Consumer, Complaintent" c4Type="Person" c4Description="A customer of one of the companies which reports a complaint." label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#cccccc&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" placeholders="1" id="xMGN7pVzyZbF6fk4kW2v-1">
+          <mxCell parent="1" style="html=1;fontSize=11;dashed=0;whiteSpace=wrap;fillColor=#083F75;strokeColor=#06315C;fontColor=#ffffff;shape=mxgraph.c4.person2;align=center;metaEdit=1;points=[[0.5,0,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0]];resizable=1;movable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" vertex="1">
+            <mxGeometry height="180" width="200" x="600" y="10" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="xMGN7pVzyZbF6fk4kW2v-18" edge="1" parent="1" source="xMGN7pVzyZbF6fk4kW2v-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="xMGN7pVzyZbF6fk4kW2v-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5TWnXkLBehuvL077Pz3o-2" connectable="0" parent="xMGN7pVzyZbF6fk4kW2v-18" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Provides the ticket/consumer&lt;div&gt;&amp;nbsp;information for notifications&lt;/div&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.2894" y="-2" as="geometry">
+            <mxPoint x="37" y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xMGN7pVzyZbF6fk4kW2v-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Complaint Management System (CMS)&lt;div&gt;[Software System]&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Allows users to view document and view complaint cases reports by consumers so that they can be handled by their respective company.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="150" width="250" x="-132" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="xMGN7pVzyZbF6fk4kW2v-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Email Service&lt;br&gt;&lt;div&gt;[Software System]&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Email service provider.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="150" width="250" x="540" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="xMGN7pVzyZbF6fk4kW2v-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="Phone Service&lt;br&gt;&lt;div&gt;[Software System]&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="75" width="160" x="310" y="62.5" as="geometry" />
+        </mxCell>
+        <mxCell id="xMGN7pVzyZbF6fk4kW2v-12" edge="1" parent="1" source="xMGN7pVzyZbF6fk4kW2v-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" target="xMGN7pVzyZbF6fk4kW2v-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xMGN7pVzyZbF6fk4kW2v-13" connectable="0" parent="xMGN7pVzyZbF6fk4kW2v-12" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=1;points=[];movable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="Generates and manages tickets&amp;nbsp;&lt;div&gt;within the system&lt;/div&gt;" vertex="1">
+          <mxGeometry relative="1" x="0.0082" y="3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <object c4Name="Help Desk Agent" c4Type="Person" c4Description="A staff member of one of the tenants responsible for assigning support persons to tickets and may also resolve tickets on first contact." label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#cccccc&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" placeholders="1" id="xMGN7pVzyZbF6fk4kW2v-5">
+          <mxCell parent="1" style="html=1;fontSize=11;dashed=0;whiteSpace=wrap;fillColor=#083F75;strokeColor=#06315C;fontColor=#ffffff;shape=mxgraph.c4.person2;align=center;metaEdit=1;points=[[0.5,0,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0]];resizable=1;movable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" vertex="1">
+            <mxGeometry height="180" width="200" x="-107" y="10" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="xMGN7pVzyZbF6fk4kW2v-10" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" target="xMGN7pVzyZbF6fk4kW2v-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="162.99999999999955" y="100" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xMGN7pVzyZbF6fk4kW2v-11" connectable="0" parent="xMGN7pVzyZbF6fk4kW2v-10" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=1;points=[];movable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="Receives calls from consumers" vertex="1">
+          <mxGeometry relative="1" x="0.0593" y="-2" as="geometry">
+            <mxPoint x="95" y="2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xMGN7pVzyZbF6fk4kW2v-17" edge="1" parent="1" source="xMGN7pVzyZbF6fk4kW2v-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="xMGN7pVzyZbF6fk4kW2v-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5TWnXkLBehuvL077Pz3o-1" connectable="0" parent="xMGN7pVzyZbF6fk4kW2v-17" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Assign roles to users and manage their permissions" vertex="1">
+          <mxGeometry relative="1" x="-0.1024" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <object c4Name="System Administrator" c4Type="Person" c4Description="An admin that assigns roles and manages permissions of users within the system." label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#cccccc&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" placeholders="1" id="xMGN7pVzyZbF6fk4kW2v-14">
+          <mxCell parent="1" style="html=1;fontSize=11;dashed=0;whiteSpace=wrap;fillColor=#083F75;strokeColor=#06315C;fontColor=#ffffff;shape=mxgraph.c4.person2;align=center;metaEdit=1;points=[[0.5,0,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0]];resizable=0;" vertex="1">
+            <mxGeometry height="180" width="200" x="-107" y="830" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="xMGN7pVzyZbF6fk4kW2v-19" edge="1" parent="1" source="xMGN7pVzyZbF6fk4kW2v-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" target="xMGN7pVzyZbF6fk4kW2v-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="700" y="480" />
+              <mxPoint x="700" y="190" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xMGN7pVzyZbF6fk4kW2v-20" connectable="0" parent="xMGN7pVzyZbF6fk4kW2v-19" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=1;points=[];movable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="Sends notifications to consumers/users&amp;nbsp;&lt;div&gt;of any&amp;nbsp;&lt;span style=&quot;background-color: light-dark(#ffffff, var(--ge-dark-color, #121212)); color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;relative information regarding their&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: light-dark(#ffffff, var(--ge-dark-color, #121212)); color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;respective tickets.&amp;nbsp;&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.3604" y="1" as="geometry">
+            <mxPoint x="3" y="19" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xMGN7pVzyZbF6fk4kW2v-24" edge="1" parent="1" source="xMGN7pVzyZbF6fk4kW2v-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="xMGN7pVzyZbF6fk4kW2v-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xMGN7pVzyZbF6fk4kW2v-25" connectable="0" parent="xMGN7pVzyZbF6fk4kW2v-24" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Updates a ticket status&amp;nbsp;&lt;div&gt;including any resolution notes&lt;/div&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.0325" y="2" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <object c4Name="Support Person" c4Type="Person" c4Description="An employee of the company using CMS that resolves an issue related to a complaint." label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#cccccc&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" placeholders="1" id="xMGN7pVzyZbF6fk4kW2v-23">
+          <mxCell parent="1" style="html=1;fontSize=11;dashed=0;whiteSpace=wrap;fillColor=#083F75;strokeColor=#06315C;fontColor=#ffffff;shape=mxgraph.c4.person2;align=center;metaEdit=1;points=[[0.5,0,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0]];resizable=0;" vertex="1">
+            <mxGeometry height="180" width="200" x="-560" y="465" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="Mmb557suDLbXunVjaM3I-4" edge="1" parent="1" source="Mmb557suDLbXunVjaM3I-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="xMGN7pVzyZbF6fk4kW2v-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Mmb557suDLbXunVjaM3I-5" connectable="0" parent="Mmb557suDLbXunVjaM3I-4" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" value="Generates reports of resolution&amp;nbsp;&lt;div&gt;times and user&lt;/div&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.0025" y="3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <object placeholders="1" c4Name="HelpDesk Manager" c4Type="Person" c4Description="Monitors performance of resolutions and support person and help desk agent" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font color=&quot;#cccccc&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" id="Mmb557suDLbXunVjaM3I-3">
+          <mxCell parent="1" style="html=1;fontSize=11;dashed=0;whiteSpace=wrap;fillColor=#083F75;strokeColor=#06315C;fontColor=#ffffff;shape=mxgraph.c4.person2;align=center;metaEdit=1;points=[[0.5,0,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0]];resizable=0;" vertex="1">
+            <mxGeometry height="180" width="200" x="-420" y="137.5" as="geometry" />
+          </mxCell>
+        </object>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
